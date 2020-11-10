@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dm/v4h-client-api)](https://www.npmjs.com/package/v4h-client-api)
 [![npm bundle size](https://img.shields.io/bundlephobia/min/v4h-client-api)](https://www.npmjs.com/package/v4h-client-api)
 
-Biblioteca para o serviço de vídeoconferência segura para saúde (V4H - Video for Health), essa aplicação permite colocar em um sistema web já existente vídeo chamadas além de um controle de acesso complexo, onde você é possível delimitar ações dos usuários dependendo do seu papel. Para mais informações clique [aqui](https.v4h.cloud).
+Biblioteca para o serviço de vídeoconferência segura para saúde (V4H - Video for Health), essa aplicação permite colocar em um sistema web já existente vídeo chamadas além de um controle de acesso complexo, onde você é possível delimitar ações dos usuários dependendo do seu papel. Para mais informações clique [aqui](https://v4h.cloud).
 
 ## Sumário
 
