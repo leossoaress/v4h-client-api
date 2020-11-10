@@ -101,8 +101,13 @@ data:
 - reg: Identificador do registro (CNPJ ou CPF)
 - logo: [opcional] URL externa para logo
 
-response: 
-- id: identificador único da organização
+Retorno: 
+
+```javascript
+{
+  id: 1
+}
+```
 
 #### ``getAll()``
 
@@ -192,6 +197,27 @@ data:
 - type: [opcional] Pessoa física ou jurídica
 - reg: [opcional] Identificador do registro (CNPJ ou CPF)
 - logo: [opcional] URL externa para logo
+
+Retorno: 
+
+```javascript
+true or false
+```
+
+#### ``delete(orgId)``
+
+Método responsável por deletar uma organização.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const orgId = 1;
+
+v4h.org.delete(orgId).then((response) => {
+  console.log(response);
+});
+```
 
 Retorno: 
 
