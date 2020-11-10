@@ -95,11 +95,11 @@ data:
 - shortname: Nome curto – usado para ocasiões com pouco espaço
 - planId: O plano ao qual a organização está vinculada
 - fullName: Nome completo ou razão social
-- alias: Nome de fantasia
+- alias: [opcional] Nome de fantasia
 - admin: id do usuário administrador da organização
 - type: Pessoa física ou jurídica
 - reg: Identificador do registro (CNPJ ou CPF)
-- logo: URL externa para logo
+- logo: [opcional] URL externa para logo
 
 response: 
 - id: identificador único da organização
@@ -112,18 +112,118 @@ Método responsável por recuperar todas as organizações criadas
 const v4h = new V4HApi();
 v4h.setup({ login: 'usuario', senha: 'senha' });
 
-cosnt org = v4h.org.getAll().then((response) => {
+v4h.org.getAll().then((org) => {
   console.log(org);
 });
 ```
 
-response: 
-- id: identificador único da organização
-- shortname: Nome curto – usado para ocasiões com pouco espaço
-- planId: O plano ao qual a organização está vinculada
-- fullName: Nome completo ou razão social
-- alias: Nome de fantasia
-- admin: id do usuário administrador da organização
-- type: Pessoa física ou jurídica
-- reg: Identificador do registro (CNPJ ou CPF)
-- logo: URL externa para logo
+Retorno:
+
+```javascript
+[{
+  id: 1,
+  shortname: "organização",
+  planId: 1,
+  fullname: "organizacao LTDA",
+  alias: "organizacao de teste",
+  admin: 1,
+  type: "J",
+  reg: "12345678912",
+  logo: null
+}]
+```
+
+#### ``get(orgId)``
+
+Método responsável por recuperar informações de uma única organiação pela identificador único da organização.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const orgId = 1;
+
+v4h.org.get(orgId).then((org) => {
+  console.log(org);
+});
+```
+
+Retorno:
+
+```javascript
+{
+  id: 1,
+  shortname: "organização",
+  planId: 1,
+  fullname: "organizacao LTDA",
+  alias: "organizacao de teste",
+  admin: 1,
+  type: "J",
+  reg: "12345678912",
+  logo: null
+}
+```
+
+#### ``update(orgId, data)``
+
+Método responsável por atualizar informações de uma organiação pelo identificador único da organização.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const orgId = 1;
+
+const data = {
+  alias: "organizacao de teste",
+};
+
+v4h.org.update(orgId, data).then((response) => {
+  console.log(response);
+});
+```
+
+data: 
+- shortname: [opcional] Nome curto – usado para ocasiões com pouco espaço
+- planId: [opcional] O plano ao qual a organização está vinculada
+- fullName: [opcional] Nome completo ou razão social
+- alias: [opcional] Nome de fantasia
+- admin: [opcional] id do usuário administrador da organização
+- type: [opcional] Pessoa física ou jurídica
+- reg: [opcional] Identificador do registro (CNPJ ou CPF)
+- logo: [opcional] URL externa para logo
+
+Retorno: 
+
+```javascript
+true or false
+```
+
+#### ``getAllSessions(orgId)``
+
+Método responsável por recuperar todas as sessões de uma organização
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+v4h.org.getAllSessions().then((sessions) => {
+  console.log(sessions);
+});
+```
+
+retorno: 
+
+```javascript
+[{
+  id: 1,
+  orgId: 1,
+  ouId: 1,
+  profileId: 1,
+  skinId: 1,
+  finished: null,
+  firstJoin: null,
+  started: null,
+  status: "READY"
+}]
+```
