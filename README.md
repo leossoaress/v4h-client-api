@@ -253,3 +253,175 @@ retorno:
   status: "READY"
 }]
 ```
+
+### Session
+
+#### ``create(data)``
+
+Método responsável por criar uma sessão
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const data = {
+  profileId: 1,
+  skinId: 1,
+  orgUnit: 1,
+  joinPolicy: 'PUBLIC',
+  listPolicy: 'PUBLIC'
+}
+
+cosnt session = v4h.session.create(data).then((response) => {
+  console.log(response);
+});
+```
+
+data: 
+- orgUnit: Identificador da unidade organizacional
+- profileId: Identificador do profile
+- skinId: Identificador do skin da conferência
+- joinPolicy: [opcional] Para acessar (entrar), as seguintes políticas podem ser usadas:
+  - ORG:  indica que a sessão somente pode acessada por algum usuário da organização
+  - ORGUNIT:  somente pode acessada por usuários das unidades organizacionais listadas no atributo allowJoinOu
+  - RESTRICT:  indica que a sessão somente pode ser acessada por usuários previamente cadastrados
+  - PUBLIC: Indica que o acesso à sessão não requer um usuário credenciado 
+  - SESSIONPWD: entra apenas informando a password da sessão
+- listPolicy: [opcional] Define como a sessão é enxergada por usuários cadastrados ou públicos na internet. 
+  - PUBLIC: a sessão pode aparecer em uma lista pública
+  - SHARED: a sessão pode aparecer em uma lista apenas para usuários da organização
+  - PRIVATE: a sessão nunca aparece em listas, exceto com autenticação de usuários e permissão verificada para listar
+- password: [opcional] senha de acesso da sessão
+- allowJoinOu: [opcional] array de unidades organizacionais
+
+Retorno: 
+
+```javascript
+{
+  id: 1
+}
+```
+
+#### ``getAll()``
+
+Método responsável por recuperar todas as sessões criadas.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+v4h.session.getAll().then((sessions) => {
+  console.log(sessions);
+});
+```
+
+Retorno:
+
+```javascript
+[{
+  id: 1,
+  orgId: 1,
+  ouId: 1,
+  profileId: 1,
+  skinId: 1,
+  finished: null,
+  firstJoin: null,
+  started: null,
+  status: "READY"
+}]
+```
+
+#### ``get(sessionId)``
+
+Método responsável por recuperar informações de uma única sessão.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const sessionId = 1;
+
+v4h.session.get(sessionId).then((session) => {
+  console.log(session);
+});
+```
+
+Retorno:
+
+```javascript
+{
+  id: 1,
+  orgId: 1,
+  ouId: 1,
+  profileId: 1,
+  skinId: 1,
+  finished: null,
+  firstJoin: null,
+  started: null,
+  status: "READY"
+}
+```
+
+#### ``update(sessionId, data)``
+
+Método responsável por atualizar informações de uma sessão pelo identificador único da sessão.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const sessionId = 1;
+
+const data = {
+  alias: "organizacao de teste",
+};
+
+v4h.session.update(sessionId, data).then((response) => {
+  console.log(response);
+});
+```
+
+data: 
+- orgUnit: [opcional] Identificador da unidade organizacional
+- profileId: [opcional] Identificador do profile
+- skinId: [opcional] Identificador do skin da conferência
+- joinPolicy: [opcional] Para acessar (entrar), as seguintes políticas podem ser usadas:
+  - ORG:  indica que a sessão somente pode acessada por algum usuário da organização
+  - ORGUNIT:  somente pode acessada por usuários das unidades organizacionais listadas no atributo allowJoinOu
+  - RESTRICT:  indica que a sessão somente pode ser acessada por usuários previamente cadastrados
+  - PUBLIC: Indica que o acesso à sessão não requer um usuário credenciado 
+  - SESSIONPWD: entra apenas informando a password da sessão
+- listPolicy: [opcional] Define como a sessão é enxergada por usuários cadastrados ou públicos na internet. 
+  - PUBLIC: a sessão pode aparecer em uma lista pública
+  - SHARED: a sessão pode aparecer em uma lista apenas para usuários da organização
+  - PRIVATE: a sessão nunca aparece em listas, exceto com autenticação de usuários e permissão verificada para listar
+- password: [opcional] senha de acesso da sessão
+- allowJoinOu: [opcional] array de unidades organizacionais
+
+
+Retorno: 
+
+```javascript
+true or false
+```
+
+#### ``delete(sessionId)``
+
+Método responsável por deletar uma sessão.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const sessionId = 1;
+
+v4h.session.delete(sessionId).then((response) => {
+  console.log(response);
+});
+```
+
+Retorno: 
+
+```javascript
+true or false
+```
