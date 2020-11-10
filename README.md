@@ -256,6 +256,8 @@ retorno:
 
 ### Session
 
+Classe com os métodos das sessões de conferência.
+
 #### ``create(data)``
 
 Método responsável por criar uma sessão
@@ -424,4 +426,48 @@ Retorno:
 
 ```javascript
 true or false
+```
+
+#### ``startConference(sessionId, options)``
+
+Método para iniciar a conferência em uma div do sistema que está sendo utilizado, esse método não está disponível se for executado utilizando node.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const sessionId = 1;
+
+const options = {
+  parentNode: document.getElementById('meet'), 
+  userInfo: { 
+    displayName: 'Leoberto' 
+  }
+}
+
+v4h.session.startConference(sessionId, options).then((response) => {
+  console.log(response);
+});
+```
+
+options
+- parentNode: div html onde deverá ser colocado o v4h
+- width: [opcional] tamanho em pixels da largura da tela de vídeo conferência
+- height: [opcional] tamanho em pixels da altura tela de vídeo conferência
+- userInfo: [opcional] objeto com informações do usuário
+  - displayName: [opcional] nome do usuário que será mostrado na tela
+
+#### ``stopConference()``
+
+Método para encerrrar uma conferência, esse método não está disponível se for executado utilizando node e só terá efeito que a conferência já estiver aberta.
+
+```javascript
+const v4h = new V4HApi();
+v4h.setup({ login: 'usuario', senha: 'senha' });
+
+const sessionId = 1;
+
+v4h.session.stopConference().then(() => {
+  console.log('ok');
+});
 ```
